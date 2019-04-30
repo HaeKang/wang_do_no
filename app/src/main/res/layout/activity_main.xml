@@ -7,8 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
     <TextView
-            android:text="test"
+            android:text="테스트테스트으"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" tools:layout_editor_absoluteY="92dp"
-            tools:layout_editor_absoluteX="93dp" android:id="@+id/textView"/>
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="181dp"
+            tools:layout_editor_absoluteX="120dp" android:id="@+id/textView2"/>
 </android.support.constraint.ConstraintLayout>
