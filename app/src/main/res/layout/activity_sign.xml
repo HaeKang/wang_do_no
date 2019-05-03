@@ -5,6 +5,51 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SignActivity">
+        tools:context=".SignActivity"
+        android:background="@drawable/background_color"
+>
 
+
+    <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                          android:id="@+id/guideline3" app:layout_constraintGuide_begin="30dp"
+                                          android:orientation="vertical"/>
+    <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                          android:id="@+id/guideline4"
+                                          android:orientation="vertical" app:layout_constraintGuide_end="31dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/User_id"
+            android:hint="ID" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="@+id/guideline3"
+            android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4" android:layout_marginRight="8dp"
+            android:layout_marginTop="276dp" app:layout_constraintTop_toTopOf="parent" android:textColor="#FFFFFFFF"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/User_pw"
+            android:hint="Password" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline3" android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            android:layout_marginRight="8dp" android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/User_id" android:textColor="#FFFFFFFF"/>
+    <ImageButton
+            android:layout_width="67dp"
+            android:layout_height="64dp" app:srcCompat="@drawable/background_color"
+            android:id="@+id/SignInOk_Btn"
+            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/User_pw"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            android:layout_marginEnd="76dp" android:layout_marginRight="76dp"
+    />
+    <ImageButton
+            android:layout_width="67dp"
+            android:layout_height="64dp" app:srcCompat="@drawable/background_color"
+            android:id="@+id/SignUp_Btn"
+            app:layout_constraintStart_toStartOf="@+id/guideline3" android:layout_marginLeft="76dp"
+            android:layout_marginStart="76dp" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/User_pw"/>
 </android.support.constraint.ConstraintLayout>
