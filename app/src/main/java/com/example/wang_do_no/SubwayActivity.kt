@@ -7,7 +7,7 @@ import kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB
 import java.sql.Types.NULL
 
 class SubwayActivity : AppCompatActivity() {
-    private val OpenApiKey = "sample"
+    private val OpenApiKey = "525353425463757436324659634e59"
     private lateinit var TypeB : TrafficSubwayButtonTypeB
 
 
