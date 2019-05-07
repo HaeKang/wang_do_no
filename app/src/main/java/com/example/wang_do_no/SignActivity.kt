@@ -13,7 +13,7 @@ class SignActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
 
-        Login_btn.setOnClickListener {
+        SignUp_btn.setOnClickListener {
             val intent_signup = Intent(this, SignUpActivity::class.java)
             startActivity(intent_signup)
         }
