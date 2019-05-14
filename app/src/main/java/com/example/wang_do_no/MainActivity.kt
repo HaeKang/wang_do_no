@@ -4,8 +4,11 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB
 
 class MainActivity : AppCompatActivity() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -13,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         // 버튼 클릭 이벤트
         Subway_Button.setOnClickListener {
-            val intent_subway = Intent(this, SubwayActivity::class.java)
+            val intent_subway = Intent(this, Subway_::class.java)
             startActivity(intent_subway)
         }
 
@@ -26,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             val intent_bus = Intent(this, BusActivity::class.java)
             startActivity(intent_bus)
         }
-
 
     }
 
