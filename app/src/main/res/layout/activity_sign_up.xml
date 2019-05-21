@@ -55,7 +55,7 @@
             android:text="아이디"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:id="@+id/Id_textView"
+            android:id="@+id/textView_id"
             app:layout_constraintBaseline_toBaselineOf="@+id/Id" android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="30dp"
             android:layout_marginStart="30dp"/>
@@ -63,21 +63,21 @@
             android:text="비밀번호"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:id="@+id/textView2" android:textSize="18sp"
+            android:id="@+id/textView_pw" android:textSize="18sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/Pw" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="30dp" android:layout_marginStart="30dp"/>
     <TextView
             android:text="닉네임"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:id="@+id/textView3" android:textSize="18sp"
+            android:id="@+id/textView_nick" android:textSize="18sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/Nickname" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="30dp" android:layout_marginStart="30dp"/>
     <TextView
             android:text="전철역"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:id="@+id/textView4" android:textSize="18sp"
+            android:id="@+id/textView_sub" android:textSize="18sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/Subway_name" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="30dp" android:layout_marginStart="30dp"/>
 </android.support.constraint.ConstraintLayout>
