@@ -18,7 +18,7 @@ class Subway_ : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_subway -> {
+            R.id.navigation_Subway -> {
 
                 return@OnNavigationItemSelectedListener true
             }

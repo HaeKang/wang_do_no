@@ -6,9 +6,78 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SignUpActivity"
-        android:background="@drawable/background_color"
+        android:background="@android:color/background_light"
 >
 
+    <EditText
 
 
+            android:layout_height="58dp"
+            android:layout_width="248dp" android:hint="아이디를 입력하세요" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="35dp" android:layout_marginRight="35dp" android:id="@+id/Id"
+            android:layout_marginTop="200dp" app:layout_constraintTop_toTopOf="parent"/>
+    <EditText
+            android:layout_width="248dp"
+            android:layout_height="58dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/Pw"
+            android:hint="비밀번호를 입력하세요" android:layout_marginEnd="35dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="35dp" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/Id"/>
+    <EditText
+            android:layout_width="248dp"
+            android:layout_height="58dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/Nickname"
+            android:hint="닉네임을 입력하세요" android:layout_marginEnd="35dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="35dp" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/Pw"/>
+    <EditText
+            android:layout_width="248dp"
+            android:layout_height="58dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/Subway_name"
+            android:hint="집 근처 전철역을 선택" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/Nickname"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Sign_up_btn" android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/Subway_name" android:text="회원가입"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"/>
+    <TextView
+            android:text="아이디"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:id="@+id/Id_textView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Id" android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"/>
+    <TextView
+            android:text="비밀번호"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:id="@+id/textView2" android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Pw" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="30dp" android:layout_marginStart="30dp"/>
+    <TextView
+            android:text="닉네임"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:id="@+id/textView3" android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Nickname" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="30dp" android:layout_marginStart="30dp"/>
+    <TextView
+            android:text="전철역"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:id="@+id/textView4" android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Subway_name" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="30dp" android:layout_marginStart="30dp"/>
 </android.support.constraint.ConstraintLayout>

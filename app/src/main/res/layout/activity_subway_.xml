@@ -12,12 +12,13 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="672dp" android:id="@+id/linearLayout"/>
+            android:layout_height="672dp" android:id="@+id/linearLayout" tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="55dp"/>
 
     <kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB
-            android:layout_width="419dp"
-            android:layout_height="673dp" android:id="@+id/type_b" tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp">
+            android:layout_width="123dp"
+            android:layout_height="125dp" android:id="@+id/type_b" tools:layout_editor_absoluteY="442dp"
+            tools:layout_editor_absoluteX="16dp">
 
     </kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB>
 
@@ -25,9 +26,7 @@
     <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"
+            android:layout_height="58dp"
             android:background="?android:attr/windowBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
