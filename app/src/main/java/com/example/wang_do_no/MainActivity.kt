@@ -1,10 +1,15 @@
 package com.example.wang_do_no
 
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,5 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 }
