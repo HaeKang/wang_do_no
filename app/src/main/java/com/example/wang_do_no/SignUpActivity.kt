@@ -20,15 +20,18 @@ import java.net.HttpURLConnection
 import java.net.URL
 import android.R.attr.country
 import android.R.attr.name
+import android.content.Intent
 import android.os.AsyncTask.execute
-
+import android.widget.Toast
 
 
 class SignUpActivity : AppCompatActivity() {
 
-    private val IP_ADDRESS = "172.30.18.8"
     private val TAG = "phptest"
 
+    companion object {
+        const val USER_NICKNAME = "USER_NICKNAME"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +45,19 @@ class SignUpActivity : AppCompatActivity() {
            var subway = Subway_name.getText().toString()
 
            val task = InsertData()
-           task.execute("http://$IP_ADDRESS/insert.php", id, pw, nickname, subway)
+           task.execute("http://"+ getString(R.string.IP_ADDRESS) + "/insert.php", id, pw, nickname, subway)
 
            Id.setText("")
            Pw.setText("")
            Nickname.setText("")
            Subway_name.setText("")
+
+           if(id != "" && pw != "" && nickname != "" && subway != "") {
+               val intent_signend = Intent(this, SignUpEnd::class.java)
+               intent_signend.putExtra(USER_NICKNAME, nickname)
+               startActivity(intent_signend)
+           }
+
        }
 
 
@@ -70,7 +80,8 @@ class SignUpActivity : AppCompatActivity() {
             super.onPostExecute(result)
 
             progressDialog.dismiss()
-            Test_Text.setText(result)
+
+            Toast.makeText(this@SignUpActivity, result, Toast.LENGTH_LONG).show()
             Log.d(TAG, "POST response  - $result")
         }
 

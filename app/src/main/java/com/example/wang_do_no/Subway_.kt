@@ -10,8 +10,7 @@ import kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB
 
 class Subway_ : AppCompatActivity() {
 
-    private val OpenApiKey = "525353425463757436324659634e59" // 실시간 정보 제외
-    private val OpenApiKey2 = "not" // 실시간 정보 포함
+    private val OpenApiKey = "44794542716375743539694f487571" // 실시간 정보 포함
 
     private lateinit var TypeB : TrafficSubwayButtonTypeB
 

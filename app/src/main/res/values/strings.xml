@@ -11,4 +11,7 @@
     <string name="title_Find">Find</string>
     <string name="title_Friend">Friend</string>
     <string name="title_activity_subway_">Subway_</string>
+
+    <string name="IP_ADDRESS">172.30.1.24</string>
+
 </resources>
