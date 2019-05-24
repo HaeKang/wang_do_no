@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.EditText
-import kotlinx.android.synthetic.main.activity_sign.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.net.HttpURLConnection.HTTP_OK
 import android.app.ProgressDialog

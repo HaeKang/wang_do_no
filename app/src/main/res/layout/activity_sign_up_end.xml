@@ -17,7 +17,7 @@
             android:text="Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button" app:layout_constraintStart_toStartOf="@+id/guideline5"
+            android:id="@+id/Main_Btn" app:layout_constraintStart_toStartOf="@+id/guideline5"
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline6" android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
