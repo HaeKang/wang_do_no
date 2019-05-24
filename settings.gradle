@@ -1,1 +1,1 @@
-include ':app', ':trafficsubway-release', ':trafficsubway'
+include ':app', ':trafficsubway-release', ':trafficsubway', ':trafficsubway-release-test'
