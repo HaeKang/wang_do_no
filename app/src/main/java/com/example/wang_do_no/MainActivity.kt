@@ -19,6 +19,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if(intent.hasExtra("user_nickname")) {
+            textView.setText(intent.getStringExtra("user_nickname") + "님 환영합니다!")
+        } else{
+            textView.setText("회원님 환영합니다!")
+        }
+
+
+
         // 버튼 클릭 이벤트
         Subway_Button.setOnClickListener {
             val intent_subway = Intent(this, Subway_::class.java)
@@ -34,6 +42,8 @@ class MainActivity : AppCompatActivity() {
             val intent_bus = Intent(this, BusActivity::class.java)
             startActivity(intent_bus)
         }
+
+
 
     }
 

@@ -16,8 +16,8 @@
             tools:layout_editor_absoluteX="55dp"/>
 
     <kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB
-            android:layout_width="123dp"
-            android:layout_height="125dp" android:id="@+id/type_b" tools:layout_editor_absoluteY="442dp"
+            android:layout_width="391dp"
+            android:layout_height="603dp" android:id="@+id/type_b" tools:layout_editor_absoluteY="28dp"
             tools:layout_editor_absoluteX="16dp">
 
     </kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB>

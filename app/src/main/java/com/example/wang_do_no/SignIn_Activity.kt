@@ -1,6 +1,6 @@
 package com.example.wang_do_no
 
-import android.app.ProgressDialog
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
@@ -12,32 +12,35 @@ import kotlinx.android.synthetic.main.activity_sign_in_.*
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.lang.reflect.Method
 import java.net.HttpURLConnection
 import java.net.URL
+import android.support.v4.content.ContextCompat.startActivity
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
+import org.json.JSONObject
+import org.json.JSONException
+import android.widget.SimpleAdapter
+import org.json.JSONArray
+import android.app.ProgressDialog
+import android.support.v4.app.FragmentActivity
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class SignIn_Activity : AppCompatActivity() {
 
-    private val TAG = "phpquerytest"
+    val TAG = "phpquerytest"
+    val TAG_JSON = "webnautes"
+    val TAG_ID = "id"
+    val TAG_PW = "pw"
+    val TAG_NICK = "nickname"
+    val TAG_SUBWAY = "subway"
 
-    private val TAG_JSON = "webnautes"
-    private val TAG_ID = "id"
-    private val TAG_NAME = "name"
-    private val TAG_ADDRESS = "country"
-
-    private val mTextViewResult: TextView? = null
-    var mArrayList: ArrayList<HashMap<String, String>>? = null
     var mJsonString: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in_)
-
-        var id = edit_username.getText().toString()
-        var pw = edit_password.getText().toString()
-        var nickname = ""
-        var  mTextViewResult : TextView? = textView
-
-
 
 
         SignUp_Btn.setOnClickListener {
@@ -46,21 +49,13 @@ class SignIn_Activity : AppCompatActivity() {
         }
 
 
-        SignInOk_Btn.setOnClickListener{
-
-            mArrayList?.clear()
+        SignInOk_Btn.setOnClickListener {
             val task = GetData()
-            task.execute(id, pw)
-
-            mArrayList = ArrayList()
-
-            // 로그인 성공 시
-            //Toast.makeText(this@SignIn_Activity,"로그인 성공", Toast.LENGTH_LONG).show()
-           // val intent_main = Intent(this, MainActivity::class.java)
-            // startActivity(intent_main)
+            task.execute(edit_username.getText().toString(), edit_password.getText().toString())
         }
 
     }
+
 
     private inner class GetData : AsyncTask<String, Void, String>() {
 
@@ -81,13 +76,23 @@ class SignIn_Activity : AppCompatActivity() {
             super.onPostExecute(result)
 
             progressDialog.dismiss()
-            mTextViewResult?.setText(result)
+
+            var result = result.toString()
+
+            if(result == "아이디와 패스워드를 다시 확인하세요") {
+                Toast.makeText(this@SignIn_Activity, result, Toast.LENGTH_LONG).show()
+            }else{
+                Toast.makeText(this@SignIn_Activity, "로그인에 성공했습니다!",Toast.LENGTH_LONG).show()
+            }
+
+            Log.d(TAG, "response - " + result!!)
+
 
             if (result == null) {
-                mTextViewResult?.setText(errorString)
-            } else {
-
+            }
+            else {
                 mJsonString = result
+                showResult()
             }
         }
 
@@ -97,8 +102,8 @@ class SignIn_Activity : AppCompatActivity() {
             val searchKeyword1 = params[0]
             val searchKeyword2 = params[1]
 
-            val serverURL = "http://"+ getString(com.example.wang_do_no.R.string.IP_ADDRESS) +"query.php"
-            val postParameters = "id=$searchKeyword1 & pw=$searchKeyword2"
+            val serverURL = "http://" + getString(com.example.wang_do_no.R.string.IP_ADDRESS) + "/query_test.php"
+            val postParameters = "id=$searchKeyword1 &pw=$searchKeyword2"
 
 
             try {
@@ -107,27 +112,27 @@ class SignIn_Activity : AppCompatActivity() {
                 val httpURLConnection = url.openConnection() as HttpURLConnection
 
 
-                httpURLConnection.setReadTimeout(5000)
-                httpURLConnection.setConnectTimeout(5000)
-                httpURLConnection.setRequestMethod("POST")
-                httpURLConnection.setDoInput(true)
+                httpURLConnection.readTimeout = 5000
+                httpURLConnection.connectTimeout = 5000
+                httpURLConnection.requestMethod = "POST"
+                httpURLConnection.doInput = true
                 httpURLConnection.connect()
 
 
-                val outputStream = httpURLConnection.getOutputStream()
+                val outputStream = httpURLConnection.outputStream
                 outputStream.write(postParameters.toByteArray(charset("UTF-8")))
                 outputStream.flush()
                 outputStream.close()
 
 
-                val responseStatusCode = httpURLConnection.getResponseCode()
+                val responseStatusCode = httpURLConnection.responseCode
                 Log.d(TAG, "response code - $responseStatusCode")
 
                 val inputStream: InputStream
                 if (responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream()
+                    inputStream = httpURLConnection.inputStream
                 } else {
-                    inputStream = httpURLConnection.getErrorStream()
+                    inputStream = httpURLConnection.errorStream
                 }
 
 
@@ -139,7 +144,7 @@ class SignIn_Activity : AppCompatActivity() {
 
                 var nullcheck = true
 
-                while (nullcheck) {
+                while (nullcheck)  {
                     var line = bufferedReader.readLine()
                     if(line != null){
                         sb.append(line)
@@ -150,8 +155,6 @@ class SignIn_Activity : AppCompatActivity() {
                 }
 
                 bufferedReader.close()
-
-
                 return sb.toString().trim { it <= ' ' }
 
 
@@ -166,4 +169,37 @@ class SignIn_Activity : AppCompatActivity() {
         }
     }
 
+
+    private fun showResult() {
+        try {
+            val jsonObject = JSONObject(mJsonString)
+            val jsonArray = jsonObject.getJSONArray(TAG_JSON)
+
+
+            val item = jsonArray.getJSONObject(0)
+
+            val id = item.getString(TAG_ID)
+            val pw = item.getString(TAG_PW)
+            val nickname = item.getString(TAG_NICK)
+            val subway = item.getString(TAG_SUBWAY)
+
+
+            val intent_signin = Intent(this@SignIn_Activity, MainActivity::class.java)
+            intent_signin.putExtra("user_id",id)
+            intent_signin.putExtra("user_pw",pw)
+            intent_signin.putExtra("user_nickname",nickname)
+            intent_signin.putExtra("user_subway",subway)
+            startActivity(intent_signin)
+
+        } catch (e: JSONException) {
+
+            Log.d(TAG, "showResult : ", e)
+
+        }
+
+    }
+
+
 }
+
+
