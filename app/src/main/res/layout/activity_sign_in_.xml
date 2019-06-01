@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SignIn_Activity">
+        tools:context=".Sign.SignIn_Activity">
 
     <android.support.v7.widget.CardView
             android:layout_width="300dp"
@@ -29,8 +29,10 @@
                     android:id="@+id/edit_username"
                     android:hint=" ID"
                     android:layout_margin="16dp" android:textColor="#ffffff" android:textColorHint="#ffffff"
-                    android:background="@android:color/holo_orange_dark" android:drawableLeft="@drawable/btn_close"
-                    android:drawableStart="@drawable/btn_close"/>
+                    android:background="@android:color/holo_orange_dark"
+                    android:drawableLeft="@drawable/login_id"
+                    android:drawablePadding="3dp" android:typeface="normal"
+                    android:fontFamily="@font/nanumsquareroundr"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="41dp"
@@ -40,8 +42,8 @@
                     android:layout_margin="16dp"
                     android:inputType="textPassword" android:background="@android:color/holo_orange_dark"
                     android:textColor="#ffffff" android:textColorHint="#ffffff"
-                    android:drawableStart="@drawable/btn_close"
-                    android:drawableLeft="@drawable/btn_close"/>
+                    android:drawableLeft="@drawable/login_pw" android:drawablePadding="3dp" android:typeface="normal"
+                    android:fontFamily="@font/nanumsquareroundr"/>
             <Button
                     android:text="로그인"
                     android:layout_width="match_parent"
@@ -49,7 +51,8 @@
                     android:id="@+id/SignInOk_Btn"
                     android:background="@android:color/holo_orange_dark"
                     android:textColor="@color/cardview_light_background" android:gravity="center"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center" android:typeface="normal"
+                    android:fontFamily="@font/nanumsquareroundr"/>
             <Button
                     android:text="회원가입"
                     android:layout_width="match_parent"
@@ -57,7 +60,8 @@
                     android:id="@+id/SignUp_Btn"
                     android:background="@android:color/holo_orange_light"
                     android:textColor="@color/cardview_light_background" android:gravity="center"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center" android:typeface="normal"
+                    android:fontFamily="@font/nanumsquareroundr"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

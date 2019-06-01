@@ -12,6 +12,19 @@
     <string name="title_Friend">Friend</string>
     <string name="title_activity_subway_">Subway_</string>
 
-    <string name="IP_ADDRESS">172.30.1.9</string>
+
+    <string name="IP_ADDRESS">172.30.1.56</string>
+    <string name="odsay_key">1yVQ8nnVJ4S4AxSyhd%2FsI5Onevlu5YwdvlxOQ9O6iy8</string>
+
+    <string name="title_activity_find_subway">FindSubway</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_find__subway">Find_Subway</string>
+    <string name="title_one">길찾기</string>
+    <string name="title_two">중간지점찾기</string>
+
 
 </resources>

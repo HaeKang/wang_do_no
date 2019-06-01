@@ -1,1 +1,1 @@
-include ':app', ':trafficsubway-release', ':trafficsubway', ':trafficsubway-release-test'
+include ':app', ':trafficsubway-release', ':trafficsubway', ':trafficsubway-release-test', ':ODsayAndroid'

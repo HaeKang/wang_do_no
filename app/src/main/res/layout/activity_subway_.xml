@@ -6,31 +6,40 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Subway_">
+        tools:context=".subway.Subway_">
 
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="672dp" android:id="@+id/linearLayout" tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="55dp"/>
 
     <kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB
-            android:layout_width="391dp"
-            android:layout_height="603dp" android:id="@+id/type_b" tools:layout_editor_absoluteY="28dp"
-            tools:layout_editor_absoluteX="16dp">
+            android:layout_width="151dp"
+            android:layout_height="158dp" android:id="@+id/type_b"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" android:layout_marginTop="50dp" app:layout_constraintTop_toTopOf="parent">
 
     </kr.go.seoul.trafficsubway.TrafficSubwayButtonTypeB>
 
+    <ImageButton
+            android:layout_width="159dp"
+            android:layout_height="138dp" app:srcCompat="@drawable/subway_find"
+            android:id="@+id/Find_btn" android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/type_b" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:background="#ffffff"/>
 
-    <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="0dp"
-            android:layout_height="58dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/navigation"/>
+    <ImageButton
+            android:layout_width="159dp"
+            android:layout_height="138dp" app:srcCompat="@drawable/subway_friend"
+            android:id="@+id/Freind_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/Find_btn"
+            android:scaleType="fitCenter"
+            android:background="#ffffff"
+    />
+
 
 </android.support.constraint.ConstraintLayout>
