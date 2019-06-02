@@ -13,7 +13,6 @@ import com.odsay.odsayandroidsdk.API
 import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
 import com.odsay.odsayandroidsdk.OnResultCallbackListener
-import kotlinx.android.synthetic.main.fragment_find.*
 import org.json.JSONException
 
 // TODO: Rename parameter arguments, choose names that match

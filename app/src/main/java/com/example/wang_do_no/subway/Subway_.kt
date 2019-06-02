@@ -10,7 +10,6 @@ import android.util.Log
 import android.widget.Toast
 
 import com.example.wang_do_no.R
-import com.example.wang_do_no.test2
 import com.odsay.odsayandroidsdk.API
 import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
@@ -50,7 +49,7 @@ class Subway_ : AppCompatActivity() {
         type_b.setButtonText("")
 
         Find_btn.setOnClickListener{
-            val intent_find = Intent(this, test2::class.java)
+            val intent_find = Intent(this, Find_Subway::class.java)
             startActivity(intent_find)
         }
 
