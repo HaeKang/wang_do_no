@@ -19,7 +19,7 @@ class SignUpEnd : AppCompatActivity() {
         }
 
         Main_Btn.setOnClickListener{
-            val intent_main = Intent(this, SignUpActivity::class.java)
+            val intent_main = Intent(this, SignIn_Activity::class.java)
             startActivity(intent_main)
         }
     }

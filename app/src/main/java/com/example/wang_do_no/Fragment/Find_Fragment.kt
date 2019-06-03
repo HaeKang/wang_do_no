@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.example.wang_do_no.R
 import com.odsay.odsayandroidsdk.API
@@ -25,6 +26,10 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
+
+var stationId = intArrayOf(0, 0)
+
+
 class Find_Fragment : Fragment() {
 
     override fun onCreateView(
@@ -53,14 +58,31 @@ class Find_Fragment : Fragment() {
             // 호출 성공 시 실행
             override fun onSuccess(odsayData: ODsayData, api: API) {
                 try {
-                    var jsonObject = odsayData.getJson()
-                    textView3.setText(jsonObject.toString())
 
-                   /* if (api == API.BUS_STATION_INFO) {
-                        var stationName = odsayData.json.getJSONObject("result").getString("stationName")
-                        Log.d("Station name : %s", stationName)
-                        textView3.setText(stationName)
-                    }*/
+                    //최단거리
+                    if(api == API.SUBWAY_PATH) {
+                        var startStation = odsayData.json.getJSONObject("result").getString("globalStartName")
+                        var endStation = odsayData.json.getJSONObject("result").getString("globalEndName")
+                        var time = odsayData.json.getJSONObject("result").getString("globalTravelTime")
+
+                        textView2.setText(startStation + " " + endStation + " " + time)
+                        Log.d("test", "여긴 옴")
+                    }
+
+                    //지하철 역 id
+                    if(api == API.SEARCH_STATION){
+                        var stationNo = odsayData.json.getJSONObject("result")
+                            .getJSONArray("station").getJSONObject(0).getString("stationID")
+
+                        if(stationId[0] == 0){
+                            stationId[0] = stationNo.toInt()
+                            Log.d("test",stationId[0].toString())
+                        }else{
+                            stationId[1] = stationNo.toInt()
+                            Log.d("test",stationId[1].toString())
+                        }
+                    }
+
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -70,18 +92,42 @@ class Find_Fragment : Fragment() {
             // 호출 실패 시 실행
             override fun onError(i: Int, errorMessage: String, api: API) {
                 Log.d("test", errorMessage)
-                textView3.setText("API : " + api.name + "\n" + KEY_Final + "\n"+ errorMessage)
+                textView2.setText("API : " + api.name + "\n" + KEY_Final + "\n"+ errorMessage)
             }
         }
+
         // API 호출
-        odsayService.requestSubwayPath("1000", "201", "222", "1", onResultCallbackListener)
+        var startstation = start_text.getText()
+        var endstation = end_text.getText()
 
+        odsayService.requestSearchStation(
+            startstation.toString(),
+            "1000",
+            "2",
+            "1",
+            "1",
+            "127.0363583:37.5113295",
+            onResultCallbackListener
+        )
+
+
+        odsayService.requestSearchStation(
+            endstation.toString(),
+            "1000",
+            "2",
+            "1",
+            "1",
+            "",
+            onResultCallbackListener
+        )
+
+        find_btn.setOnClickListener {
+
+            odsayService.requestSubwayPath("1000", "${stationId[0]}","${stationId[1]}", "1", onResultCallbackListener)
+
+            stationId[0] = 0
+            stationId[1] = 0
+
+        }
     }
-
-
-    fun Findsubwayid(name : String) {
-
-    }
-
-
 }
