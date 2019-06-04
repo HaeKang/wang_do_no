@@ -167,6 +167,7 @@ class Find_Fragment : Fragment() {
                 endName.setText(endstation)
 
                 when(stationNum[0]){
+                    null -> middle_img.setImageResource(R.drawable.check_off)
                     "0" -> start_img.setImageResource(R.drawable.check_off)
                     "1" -> start_img.setImageResource(R.drawable.full_1_2)
                     "2" -> start_img.setImageResource(R.drawable.full_2_2)
@@ -185,6 +186,7 @@ class Find_Fragment : Fragment() {
                 }
 
                 when(stationNum[1]){
+                    null -> middle_img.setImageResource(R.drawable.check_off)
                     "0" -> end_img.setImageResource(R.drawable.check_off)
                     "1" -> end_img.setImageResource(R.drawable.full_1_2)
                     "2" -> end_img.setImageResource(R.drawable.full_2_2)

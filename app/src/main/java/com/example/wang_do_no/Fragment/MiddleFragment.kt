@@ -167,6 +167,7 @@ class MiddleFragment : Fragment() {
                 )
 
                 when(stationNum_mid){
+                    null -> middle_img.setImageResource(R.drawable.check_off)
                     "0" -> middle_img.setImageResource(R.drawable.check_off)
                     "1" -> middle_img.setImageResource(R.drawable.full_1_2)
                     "2" -> middle_img.setImageResource(R.drawable.full_2_2)
