@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 
 import com.example.wang_do_no.R
 import com.odsay.odsayandroidsdk.API
@@ -15,7 +14,9 @@ import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
 import com.odsay.odsayandroidsdk.OnResultCallbackListener
 import kotlinx.android.synthetic.main.fragment_find_.*
+import kotlinx.android.synthetic.main.fragment_middle.*
 import org.json.JSONException
+import kotlin.concurrent.thread
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,22 +66,29 @@ class Find_Fragment : Fragment() {
                         var endStation = odsayData.json.getJSONObject("result").getString("globalEndName")
                         var time = odsayData.json.getJSONObject("result").getString("globalTravelTime")
 
-                        textView2.setText(startStation + " " + endStation + " " + time)
+
+                        textView2.setText(startStation + " " + endStation + " " + time )
                         Log.d("test", "여긴 옴")
+
                     }
 
                     //지하철 역 id
                     if(api == API.SEARCH_STATION){
+                        var stationarray = odsayData.json.getJSONObject("result")
+                            .getJSONArray("station").getJSONObject(0)
                         var stationNo = odsayData.json.getJSONObject("result")
                             .getJSONArray("station").getJSONObject(0).getString("stationID")
 
+                        Log.d("test",stationarray.toString())
+
                         if(stationId[0] == 0){
                             stationId[0] = stationNo.toInt()
-                            Log.d("test",stationId[0].toString())
                         }else{
                             stationId[1] = stationNo.toInt()
-                            Log.d("test",stationId[1].toString())
+
                         }
+
+                        Log.d("test","if문 끝난 후 ${stationId[0]}  ${stationId[1]}")
                     }
 
                 } catch (e: JSONException) {
@@ -97,36 +105,53 @@ class Find_Fragment : Fragment() {
         }
 
         // API 호출
-        var startstation = start_text.getText()
-        var endstation = end_text.getText()
-
-        odsayService.requestSearchStation(
-            startstation.toString(),
-            "1000",
-            "2",
-            "1",
-            "1",
-            "127.0363583:37.5113295",
-            onResultCallbackListener
-        )
-
-
-        odsayService.requestSearchStation(
-            endstation.toString(),
-            "1000",
-            "2",
-            "1",
-            "1",
-            "",
-            onResultCallbackListener
-        )
 
         find_btn.setOnClickListener {
 
-            odsayService.requestSubwayPath("1000", "${stationId[0]}","${stationId[1]}", "1", onResultCallbackListener)
+            var startstation = start_text.getText().toString()
+            var endstation = end_text.getText().toString()
+
+            Log.d("test",startstation+endstation)
+
+
+            odsayService.requestSearchStation(
+                startstation,
+                "1000",
+                "2",
+                "1",
+                "1",
+                "127.0363583:37.5113295",
+                onResultCallbackListener
+            )
+
+
+            odsayService.requestSearchStation(
+                endstation,
+                "1000",
+                "2",
+                "1",
+                "1",
+                "",
+                onResultCallbackListener
+            )
+
+            Thread.sleep(2000)
+            Log.d("test",stationId[0].toString())
+            Log.d("test",stationId[1].toString())
+
+            odsayService.requestSubwayPath(
+                    "1000",
+                    "${stationId[0]}",
+                    "${stationId[1]}",
+                    "1",
+                    onResultCallbackListener
+                )
 
             stationId[0] = 0
             stationId[1] = 0
+
+            Log.d("test",stationId[0].toString())
+            Log.d("test",stationId[1].toString())
 
         }
     }

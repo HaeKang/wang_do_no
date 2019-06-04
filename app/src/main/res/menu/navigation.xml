@@ -3,13 +3,13 @@
 
     <item
             android:id="@+id/navigation_find"
-            android:icon="@drawable/subway_find"
+            android:icon="@drawable/findsubway"
             android:title="@string/title_one"
     />
 
     <item
             android:id="@+id/navigation_middle"
-            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:icon="@drawable/middle"
             android:title="@string/title_two"
     />
 

@@ -14,11 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(intent.hasExtra("user_nickname")) {
-            textView.setText(intent.getStringExtra("user_nickname") + "님 환영합니다!")
-        } else{
-            textView.setText("회원님 환영합니다!")
-        }
 
         var id = intent.getStringExtra("user_id")
         var pw = intent.getStringExtra("user_pw")

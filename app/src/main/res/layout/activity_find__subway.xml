@@ -23,7 +23,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_orange_light"
-            app:itemIconTint="@color/cardview_light_background"
             app:itemTextColor="@color/cardview_light_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
