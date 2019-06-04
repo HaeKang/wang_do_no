@@ -29,6 +29,8 @@ private const val ARG_PARAM2 = "param2"
  */
 
 var stationId_mid = intArrayOf(0, 0)
+var stationNum_mid = ""
+var stationMidName = ""
 
 
 class MiddleFragment : Fragment() {
@@ -68,7 +70,7 @@ class MiddleFragment : Fragment() {
                         var stationMidArray = odsayData.json.getJSONObject("result").getJSONObject("stationSet").
                             getJSONArray("stations").getJSONObject(stationMidIndex)
 
-                        var stationMidName = stationMidArray.getString("startName")
+                        stationMidName = stationMidArray.getString("startName").toString()
 
                         test.setText(stationMidName)
 
@@ -81,12 +83,19 @@ class MiddleFragment : Fragment() {
                         var stationNo = odsayData.json.getJSONObject("result")
                             .getJSONArray("station").getJSONObject(0).getString("stationID")
 
+                        var stationLine = odsayData.json.getJSONObject("result")
+                            .getJSONArray("station").getJSONObject(0).getString("type")
+
                         if(stationId_mid[0] == 0){
                             stationId_mid[0] = stationNo.toInt()
-                        }else{
+                        }else if (stationId_mid[1] == 0){
                             stationId_mid[1] = stationNo.toInt()
-
                         }
+
+                        if(stationMidName != ""){
+                            stationNum_mid = stationLine
+                        }
+
                     }
 
                 } catch (e: JSONException) {
@@ -141,11 +150,46 @@ class MiddleFragment : Fragment() {
                     "1",
                     onResultCallbackListener)
 
+            }, 1000)
+
+            Log.d("test", stationMidName)
+
+            delayHandler.postDelayed({
+
+                odsayService.requestSearchStation(
+                    stationMidName,
+                    "1000",
+                    "2",
+                    "1",
+                    "1",
+                    "",
+                    onResultCallbackListener
+                )
+
+                when(stationNum_mid){
+                    "0" -> middle_img.setImageResource(R.drawable.check_off)
+                    "1" -> middle_img.setImageResource(R.drawable.full_1_2)
+                    "2" -> middle_img.setImageResource(R.drawable.full_2_2)
+                    "3" -> middle_img.setImageResource(R.drawable.full_3_2)
+                    "4" -> middle_img.setImageResource(R.drawable.full_4_2)
+                    "5" -> middle_img.setImageResource(R.drawable.full_5_2)
+                    "6" -> middle_img.setImageResource(R.drawable.full_6_2)
+                    "7" -> middle_img.setImageResource(R.drawable.full_7_2)
+                    "8" -> middle_img.setImageResource(R.drawable.full_8_2)
+                    "9" -> middle_img.setImageResource(R.drawable.full_9_2)
+                    "100" -> middle_img.setImageResource(R.drawable.full_bundang_2)
+                    "101" -> middle_img.setImageResource(R.drawable.full_konghang_2)
+                    "108" -> middle_img.setImageResource(R.drawable.full_kyeongchun_2)
+                    "109" -> middle_img.setImageResource(R.drawable.full_sinbundang_2)
+                    "112" -> middle_img.setImageResource(R.drawable.full_kyeong_2)
+                }
+
 
                 stationId_mid[0] = 0
                 stationId_mid[1] = 0
-            }, 2000)
-
+                stationMidName = ""
+                stationNum_mid = ""
+            }, 1000)
         }
 
     }

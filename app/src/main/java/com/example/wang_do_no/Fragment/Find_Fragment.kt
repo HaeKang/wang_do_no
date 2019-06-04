@@ -71,7 +71,7 @@ class Find_Fragment : Fragment() {
                         var endStation = odsayData.json.getJSONObject("result").getString("globalEndName")
                         var time = odsayData.json.getJSONObject("result").getString("globalTravelTime")
 
-                        TimeSum.setText("소요시간 \n" + time.toString())
+                        TimeSum.setText("소요시간 \n" + time.toString()+"분")
 
                         Log.d("test", "경로찾기옴")
 
@@ -214,7 +214,7 @@ class Find_Fragment : Fragment() {
                 stationNum[1] = ""
 
 
-            }, 2000)
+            }, 1000)
 
         }
     }

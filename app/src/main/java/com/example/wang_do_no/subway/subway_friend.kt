@@ -46,11 +46,32 @@ class subway_friend : AppCompatActivity() {
 
         main_textview.setText(nickname+"님 환영합니다 \n 알고싶은 사용자의 닉네임을 검색하세요!")
 
-
+        //버튼 클릭 이벤트
         search_btn.setOnClickListener {
             val task = GetData()
             task.execute(search_nick.getText().toString())
         }
+
+        //text 복사 이벤트
+        fun clip() {
+            val subway_f = subresult_textview.getText().toString()
+            val clipManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("전철역",subway_f)
+            clipManager!!.setPrimaryClip(clipData)
+
+            Toast.makeText(this@subway_friend,"전철역 복사 완료",Toast.LENGTH_LONG).show()
+
+        }
+
+        subresult_textview.setOnTouchListener(View.OnTouchListener{view,motionEvent->
+            when(motionEvent.action){
+                MotionEvent.ACTION_DOWN -> clip()
+            }
+
+            return@OnTouchListener true
+        })
+
+
     }
 
     private inner class GetData : AsyncTask<String, Void, String>() {

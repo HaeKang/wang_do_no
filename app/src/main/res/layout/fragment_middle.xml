@@ -15,17 +15,18 @@
             android:layout_marginTop="40dp" app:layout_constraintTop_toBottomOf="@+id/end_text_mid"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"/>
+            android:layout_marginRight="8dp" android:textColor="@color/cardview_light_background"
+            android:background="@android:color/holo_orange_light"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/start_text_mid"
-            android:layout_marginTop="112dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:hint="출발지를 입력하세요"/>
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:hint="출발지를 입력하세요"
+            android:layout_marginTop="44dp" app:layout_constraintTop_toBottomOf="@+id/imageView4"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,10 +39,28 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:hint="목적지를 입력하세요"/>
     <TextView
             android:layout_width="169dp"
-            android:layout_height="162dp"
+            android:layout_height="41dp"
             android:id="@+id/test" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" android:gravity="center" android:layout_marginTop="68dp"
-            app:layout_constraintTop_toBottomOf="@+id/middle_btn"/>
+            android:layout_marginRight="8dp" android:gravity="center"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/middle_img"/>
+    <ImageView
+            android:src="@drawable/check_off"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:id="@+id/middle_img" android:layout_marginTop="52dp"
+            app:layout_constraintTop_toBottomOf="@+id/middle_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"/>
+    <ImageView
+            android:src="@drawable/middle_big"
+            android:layout_width="156dp"
+            android:layout_height="128dp"
+            android:id="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
