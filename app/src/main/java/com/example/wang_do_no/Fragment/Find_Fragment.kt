@@ -17,6 +17,10 @@ import kotlinx.android.synthetic.main.fragment_find_.*
 import kotlinx.android.synthetic.main.fragment_middle.*
 import org.json.JSONException
 import kotlin.concurrent.thread
+import android.os.Handler
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,17 +32,18 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 
-var stationId = intArrayOf(0, 0)
-
+var stationId = intArrayOf(0, 0)         // ID 코드
+var stationNum  = arrayOf("", "") // 몇호선
 
 class Find_Fragment : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find_, container, false)
+        return inflater.inflate(com.example.wang_do_no.R.layout.fragment_find_, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,10 +52,10 @@ class Find_Fragment : Fragment() {
         val KEY_Final = "1yVQ8nnVJ4S4AxSyhd/sI5Onevlu5YwdvlxOQ9O6iy8"
         var odsayService = ODsayService.init(this!!.getActivity()!!, KEY_Final)
 
-        // 서버 연결 제한 시간(단위(초), default : 5초)
-        odsayService.setReadTimeout(5000)
-        // 데이터 획득 제한 시간(단위(초), default : 5초)
-        odsayService.setConnectionTimeout(5000)
+        // 서버 연결 제한 시간(단위(초), default : 10초)
+        odsayService.setReadTimeout(10000)
+        // 데이터 획득 제한 시간(단위(초), default : 10초)
+        odsayService.setConnectionTimeout(10000)
 
 
 
@@ -66,9 +71,9 @@ class Find_Fragment : Fragment() {
                         var endStation = odsayData.json.getJSONObject("result").getString("globalEndName")
                         var time = odsayData.json.getJSONObject("result").getString("globalTravelTime")
 
+                        TimeSum.setText("소요시간 \n" + time.toString())
 
-                        textView2.setText(startStation + " " + endStation + " " + time )
-                        Log.d("test", "여긴 옴")
+                        Log.d("test", "경로찾기옴")
 
                     }
 
@@ -76,19 +81,26 @@ class Find_Fragment : Fragment() {
                     if(api == API.SEARCH_STATION){
                         var stationarray = odsayData.json.getJSONObject("result")
                             .getJSONArray("station").getJSONObject(0)
+
                         var stationNo = odsayData.json.getJSONObject("result")
                             .getJSONArray("station").getJSONObject(0).getString("stationID")
 
+                        var stationLine = odsayData.json.getJSONObject("result")
+                            .getJSONArray("station").getJSONObject(0).getString("type")
+
+
                         Log.d("test",stationarray.toString())
 
-                        if(stationId[0] == 0){
+                        if(stationId[0] == 0 && stationNum[0] == ""){
                             stationId[0] = stationNo.toInt()
+                            stationNum[0] = stationLine
                         }else{
                             stationId[1] = stationNo.toInt()
-
+                            stationNum[1] = stationLine
                         }
 
                         Log.d("test","if문 끝난 후 ${stationId[0]}  ${stationId[1]}")
+                        Log.d("test","if문 끝난 후 ${stationNum[0]}  ${stationNum[1]}")
                     }
 
                 } catch (e: JSONException) {
@@ -100,7 +112,7 @@ class Find_Fragment : Fragment() {
             // 호출 실패 시 실행
             override fun onError(i: Int, errorMessage: String, api: API) {
                 Log.d("test", errorMessage)
-                textView2.setText("API : " + api.name + "\n" + KEY_Final + "\n"+ errorMessage)
+
             }
         }
 
@@ -135,11 +147,15 @@ class Find_Fragment : Fragment() {
                 onResultCallbackListener
             )
 
-            Thread.sleep(2000)
-            Log.d("test",stationId[0].toString())
-            Log.d("test",stationId[1].toString())
+            val delayHandler = Handler()
 
-            odsayService.requestSubwayPath(
+            delayHandler.postDelayed({
+                Log.d("test",stationId[0].toString())
+                Log.d("test",stationId[1].toString())
+
+
+
+                odsayService.requestSubwayPath(
                     "1000",
                     "${stationId[0]}",
                     "${stationId[1]}",
@@ -147,11 +163,58 @@ class Find_Fragment : Fragment() {
                     onResultCallbackListener
                 )
 
-            stationId[0] = 0
-            stationId[1] = 0
+                startName.setText(startstation)
+                endName.setText(endstation)
 
-            Log.d("test",stationId[0].toString())
-            Log.d("test",stationId[1].toString())
+                when(stationNum[0]){
+                    "0" -> start_img.setImageResource(R.drawable.check_off)
+                    "1" -> start_img.setImageResource(R.drawable.full_1_2)
+                    "2" -> start_img.setImageResource(R.drawable.full_2_2)
+                    "3" -> start_img.setImageResource(R.drawable.full_3_2)
+                    "4" -> start_img.setImageResource(R.drawable.full_4_2)
+                    "5" -> start_img.setImageResource(R.drawable.full_5_2)
+                    "6" -> start_img.setImageResource(R.drawable.full_6_2)
+                    "7" -> start_img.setImageResource(R.drawable.full_7_2)
+                    "8" -> start_img.setImageResource(R.drawable.full_8_2)
+                    "9" -> start_img.setImageResource(R.drawable.full_9_2)
+                    "100" -> start_img.setImageResource(R.drawable.full_bundang_2)
+                    "101" -> start_img.setImageResource(R.drawable.full_konghang_2)
+                    "108" -> start_img.setImageResource(R.drawable.full_kyeongchun_2)
+                    "109" -> start_img.setImageResource(R.drawable.full_sinbundang_2)
+                    "112" -> start_img.setImageResource(R.drawable.full_kyeong_2)
+                }
+
+                when(stationNum[1]){
+                    "0" -> end_img.setImageResource(R.drawable.check_off)
+                    "1" -> end_img.setImageResource(R.drawable.full_1_2)
+                    "2" -> end_img.setImageResource(R.drawable.full_2_2)
+                    "3" -> end_img.setImageResource(R.drawable.full_3_2)
+                    "4" -> end_img.setImageResource(R.drawable.full_4_2)
+                    "5" -> end_img.setImageResource(R.drawable.full_5_2)
+                    "6" -> end_img.setImageResource(R.drawable.full_6_2)
+                    "7" -> end_img.setImageResource(R.drawable.full_7_2)
+                    "8" -> end_img.setImageResource(R.drawable.full_8_2)
+                    "9" -> end_img.setImageResource(R.drawable.full_9_2)
+                    "100" -> end_img.setImageResource(R.drawable.full_bundang_2)
+                    "101" -> end_img.setImageResource(R.drawable.full_konghang_2)
+                    "108" -> end_img.setImageResource(R.drawable.full_kyeongchun_2)
+                    "109" -> end_img.setImageResource(R.drawable.full_sinbundang_2)
+                    "112" -> end_img.setImageResource(R.drawable.full_kyeong_2)
+                }
+
+
+
+                Log.d("test","마지막" + stationId[0].toString())
+                Log.d("test","마지막"+ stationId[1].toString())
+                Log.d("test","마지막 ${stationNum[0]}  ${stationNum[1]}")
+
+                stationId[0] = 0
+                stationId[1] = 0
+                stationNum[0] = ""
+                stationNum[1] = ""
+
+
+            }, 2000)
 
         }
     }

@@ -2,6 +2,7 @@ package com.example.wang_do_no.Fragment
 
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -64,11 +65,14 @@ class MiddleFragment : Fragment() {
                         var stationNum = odsayData.json.getJSONObject("result").getString("globalStationCount").toString()
                         var stationMidIndex = stationNum.toInt() / 2
 
-                        var stationMidArray = odsayData.json.getJSONObject("result").getJSONObject("stationSet")
-                            .getJSONArray("stations").getJSONArray(stationMidIndex)
+                        var stationMidArray = odsayData.json.getJSONObject("result").getJSONObject("stationSet").
+                            getJSONArray("stations").getJSONObject(stationMidIndex)
 
+                        var stationMidName = stationMidArray.getString("startName")
 
-                        Log.d("test", stationMidArray.toString())
+                        test.setText(stationMidName)
+
+                        Log.d("test", stationMidName)
 
                     }
 
@@ -94,38 +98,54 @@ class MiddleFragment : Fragment() {
             // 호출 실패 시 실행
             override fun onError(i: Int, errorMessage: String, api: API) {
                 Log.d("test", errorMessage)
-                textView2.setText("API : " + api.name + "\n" + KEY_Final + "\n"+ errorMessage)
             }
         }
 
         // API 호출
-        var startstation = start_text_mid.getText()
-        var endstation = end_text_mid.getText()
-
-        odsayService.requestSearchStation(
-            startstation.toString(),
-            "1000",
-            "2",
-            "1",
-            "1",
-            "127.0363583:37.5113295",
-            onResultCallbackListener
-        )
-
-
-        odsayService.requestSearchStation(
-            endstation.toString(),
-            "1000",
-            "2",
-            "1",
-            "1",
-            "",
-            onResultCallbackListener
-        )
-
-
         middle_btn.setOnClickListener {
-            odsayService.requestSubwayPath("1000", "${stationId_mid[0]}","${stationId_mid[1]}", "1", onResultCallbackListener)
+
+            var startstation = start_text_mid.getText()
+            var endstation = end_text_mid.getText()
+
+            odsayService.requestSearchStation(
+                startstation.toString(),
+                "1000",
+                "2",
+                "1",
+                "1",
+                "127.0363583:37.5113295",
+                onResultCallbackListener
+            )
+
+
+            odsayService.requestSearchStation(
+                endstation.toString(),
+                "1000",
+                "2",
+                "1",
+                "1",
+                "",
+                onResultCallbackListener
+            )
+
+            val delayHandler = Handler()
+
+            delayHandler.postDelayed({
+                Log.d("test",stationId_mid[0].toString())
+                Log.d("test",stationId_mid[1].toString())
+
+
+                odsayService.requestSubwayPath("1000",
+                    "${stationId_mid[0]}",
+                    "${stationId_mid[1]}",
+                    "1",
+                    onResultCallbackListener)
+
+
+                stationId_mid[0] = 0
+                stationId_mid[1] = 0
+            }, 2000)
+
         }
 
     }
