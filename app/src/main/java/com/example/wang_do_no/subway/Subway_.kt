@@ -37,6 +37,7 @@ class Subway_ : AppCompatActivity() {
                 startActivity(intent_friend)
             }
         }
+
         else{
             Freind_btn.setOnClickListener{
                 Toast.makeText(this,"로그인 후 이용해주세요",Toast.LENGTH_LONG).show()
