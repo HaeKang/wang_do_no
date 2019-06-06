@@ -15,8 +15,6 @@
             android:theme="@style/AppTheme">
 
 
-        <activity android:name=".test2">
-        </activity>
         <activity android:name=".subway.subway_friend">
         </activity>
         <activity
