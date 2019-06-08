@@ -17,6 +17,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.support.v7.app.AppCompatActivity
+import android.view.WindowManager
 
 import com.example.wang_do_no.MainActivity
 import com.example.wang_do_no.R
@@ -37,6 +38,11 @@ class SignIn_Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 상태바 가림
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
         setContentView(R.layout.activity_sign_in_)
 
         //자동로그인
