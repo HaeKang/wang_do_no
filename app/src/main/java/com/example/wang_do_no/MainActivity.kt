@@ -3,6 +3,7 @@ package com.example.wang_do_no
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 
 import com.example.wang_do_no.Sign.SignIn_Activity
 import com.example.wang_do_no.bus.BusActivity
@@ -40,14 +41,19 @@ class MainActivity : AppCompatActivity() {
 
         Bus_Button.setOnClickListener {
             val intent_bus = Intent(this, FeelBusActivity::class.java)
-            intent_bus.putExtra("user_id",id)
-            intent_bus.putExtra("user_pw",pw)
-            intent_bus.putExtra("user_nickname",nickname)
-            intent_bus.putExtra("user_subway",subway)
             startActivity(intent_bus)
         }
 
+        //로그아웃
+        logout.setOnClickListener {
 
+            Toast.makeText(this@MainActivity,"로그아웃 했습니다",Toast.LENGTH_LONG).show()
+
+            id = null
+            pw = null
+            nickname = null
+            subway = null
+        }
 
     }
 

@@ -15,7 +15,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-            android:layout_marginBottom="80dp" app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_marginBottom="90dp" app:layout_constraintBottom_toBottomOf="parent">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -44,6 +44,10 @@
                     android:textColor="#ffffff" android:textColorHint="#ffffff"
                     android:drawableLeft="@drawable/login_pw" android:drawablePadding="3dp" android:typeface="normal"
                     android:fontFamily="@font/nanumsquareroundr"/>
+            <CheckBox
+                    android:text="CheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/autologin"/>
             <Button
                     android:text="로그인"
                     android:layout_width="match_parent"

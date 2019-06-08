@@ -28,15 +28,21 @@ class BusActivity : AppCompatActivity() {
 
         var busList: ArrayList<Bus>? = ArrayList()
 
+        Log.d("MSG","왜 안돼돼")
+
         btn_search.setOnClickListener{
 
+            Log.d("MSG","왜 안돼돼")
 
             if (editText != null){
                 stationId = editText.text.toString()
+                Log.d("MSG","왜 안돼")
 
                 var htmlURL = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey="+serviceKey+"&stationId="+stationId
 
                 try{
+
+                    Log.d("MSG","왜")
 
                     val url = URL(htmlURL)
 
@@ -46,9 +52,11 @@ class BusActivity : AppCompatActivity() {
 
                     parser.setInput(url.openStream(), "UTF-8")
 
+                    Log.d("MSG","왜 안돼돼")
                     var parserEvent = parser.eventType
 
                     var currentBus : Bus? = null
+
 
 
                     while (parserEvent != XmlPullParser.END_DOCUMENT){
@@ -87,6 +95,8 @@ class BusActivity : AppCompatActivity() {
                         parserEvent = parser.next()
                     }
 
+                    Log.d("TEXT","도대체 어디가 안되는 거야")
+
                     val feel:String = intent.getStringExtra("feeling")
 
                     when(feel) {
@@ -94,7 +104,7 @@ class BusActivity : AppCompatActivity() {
                             busList?.sortBy { it.predictTime1 }
                         }
                         "soso" -> {
-                            busList?.sortWith(compareBy({it.predictTime1},{it.remainSeatCnt1}))
+                            busList?.sortWith(compareBy<Bus>{it.predictTime1}.thenByDescending{it.remainSeatCnt1})
                         }
                         "bad" -> {
                             busList?.sortByDescending { it.remainSeatCnt1 }
@@ -119,16 +129,23 @@ class BusActivity : AppCompatActivity() {
                         busAdapter.busList = it
                         busAdapter.notifyDataSetChanged()
                     }
+                    //recycle_bus.adapter = BusAdapter(busList!!)
+                    //recycle_bus.layoutManager = LinearLayoutManager(this)
+
 
                 }catch (e: Exception){
+                    e.printStackTrace()
                     Log.d("TEST","에러발생")
                 }
+
 
             }else{
                 Toast.makeText(this,"정류장을 입력해주세요!", Toast.LENGTH_LONG).show()
             }
 
+
         }
+
 
     }
 }

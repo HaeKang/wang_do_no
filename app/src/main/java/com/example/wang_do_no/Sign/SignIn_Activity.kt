@@ -14,6 +14,7 @@ import java.net.URL
 import org.json.JSONObject
 import org.json.JSONException
 import android.app.ProgressDialog
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 
 import com.example.wang_do_no.MainActivity
@@ -31,6 +32,8 @@ class SignIn_Activity : AppCompatActivity() {
 
     var mJsonString: String? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in_)
@@ -40,7 +43,6 @@ class SignIn_Activity : AppCompatActivity() {
             val intent_signup = Intent(this, SignUpActivity::class.java)
             startActivity(intent_signup)
         }
-
 
         SignInOk_Btn.setOnClickListener {
             val task = GetData()
@@ -176,7 +178,7 @@ class SignIn_Activity : AppCompatActivity() {
             val nickname = item.getString(TAG_NICK)
             val subway = item.getString(TAG_SUBWAY)
 
-
+            //로그인 완료
             val intent_signin = Intent(this@SignIn_Activity, MainActivity::class.java)
             intent_signin.putExtra("user_id",id)
             intent_signin.putExtra("user_pw",pw)
