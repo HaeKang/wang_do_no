@@ -29,7 +29,7 @@
 
     <ImageButton
             android:layout_width="77dp"
-            android:layout_height="78dp" app:srcCompat="@drawable/singup_circle"
+            android:layout_height="78dp" app:srcCompat="@drawable/login2"
             android:id="@+id/SignIn_Button"
             app:layout_constraintStart_toEndOf="@+id/Subway_Button" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/Bus_Button"
