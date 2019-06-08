@@ -13,6 +13,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    var time : Long = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -69,8 +72,16 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity,"로그아웃 했습니다",Toast.LENGTH_LONG).show()
 
         }
-
     }
 
+    // 뒤로가기 두번 이벤트
+    override fun onBackPressed(){
+        if(System.currentTimeMillis()-time >=2000){
+            time = System.currentTimeMillis()
+            Toast.makeText(this@MainActivity, "뒤로 버튼을 한번 더 누르면 종료합니다", Toast.LENGTH_LONG).show()
+        } else if(System.currentTimeMillis()-time < 2000){
+            finish()
+        }
+    }
 
 }
