@@ -17,21 +17,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var id = intent.getStringExtra("user_id")
-        var pw = intent.getStringExtra("user_pw")
-        var nickname = intent.getStringExtra("user_nickname")
-        var subway = intent.getStringExtra("user_subway")
-
-
+        val auto = getSharedPreferences("auto", 0)
 
         // 버튼 클릭 이벤트
         Subway_Button.setOnClickListener {
+
+            var id = auto.getString("inputId", null)
             val intent_subway = Intent(this, Subway_::class.java)
-            intent_subway.putExtra("user_id",id)
-            intent_subway.putExtra("user_pw",pw)
-            intent_subway.putExtra("user_nickname",nickname)
-            intent_subway.putExtra("user_subway",subway)
-            startActivity(intent_subway)
+
+            if(id != null) {
+                // 자동로그인 상태일때
+                var nickname = auto.getString("inputNick", null)
+                var subway = auto.getString("inputSub", null)
+
+                intent_subway.putExtra("user_id",id)
+                intent_subway.putExtra("user_nickname",nickname)
+                intent_subway.putExtra("user_subway",subway)
+                startActivity(intent_subway)
+
+            } else {
+                // 자동로그인 X
+                var id = intent.getStringExtra("user_id")
+                var nickname = intent.getStringExtra("user_nickname")
+                var subway = intent.getStringExtra("user_subway")
+
+                intent_subway.putExtra("user_id",id)
+                intent_subway.putExtra("user_nickname",nickname)
+                intent_subway.putExtra("user_subway",subway)
+                startActivity(intent_subway)
+
+            }
         }
 
         SignIn_Button.setOnClickListener {
@@ -46,12 +61,6 @@ class MainActivity : AppCompatActivity() {
 
         //로그아웃
         logout.setOnClickListener {
-            id = null
-            pw = null
-            nickname = null
-            subway = null
-
-            val auto = getSharedPreferences("auto", 0)
             val autoEditor = auto.edit()
 
             autoEditor.clear()

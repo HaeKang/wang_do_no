@@ -15,6 +15,7 @@ import org.json.JSONObject
 import org.json.JSONException
 import android.app.ProgressDialog
 import android.content.Context
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.support.v7.app.AppCompatActivity
 
 import com.example.wang_do_no.MainActivity
@@ -194,8 +195,11 @@ class SignIn_Activity : AppCompatActivity() {
                 val auto = getSharedPreferences("auto", 0)
                 val autoEditor = auto.edit()
 
-                autoEditor.putString("inputId", edit_username.toString())
-                autoEditor.putString("inputPw", edit_password.toString())
+                autoEditor.putString("inputId", id)
+                autoEditor.putString("inputPw", pw)
+                autoEditor.putString("inputNick", nickname)
+                autoEditor.putString("inputSub", subway)
+
                 autoEditor.commit()
             }
 

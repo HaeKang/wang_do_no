@@ -47,7 +47,11 @@
             <CheckBox
                     android:text="자동로그인"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/autologin"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/autologin"
+                    android:checked="false"
+                    android:buttonTint="@android:color/holo_orange_light"
+            />
             <Button
                     android:text="로그인"
                     android:layout_width="match_parent"
