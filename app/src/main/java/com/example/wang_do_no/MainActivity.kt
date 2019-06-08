@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
 import com.example.wang_do_no.Sign.SignIn_Activity
+import com.example.wang_do_no.bus.BusActivity
+import com.example.wang_do_no.bus.FeelBusActivity
 import com.example.wang_do_no.subway.Subway_
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         Bus_Button.setOnClickListener {
-            val intent_bus = Intent(this, BusActivity::class.java)
+            val intent_bus = Intent(this, FeelBusActivity::class.java)
             intent_bus.putExtra("user_id",id)
             intent_bus.putExtra("user_pw",pw)
             intent_bus.putExtra("user_nickname",nickname)
