@@ -28,21 +28,16 @@ class BusActivity : AppCompatActivity() {
 
         var busList: ArrayList<Bus>? = ArrayList()
 
-        Log.d("MSG","왜 안돼돼")
-
         btn_search.setOnClickListener{
 
-            Log.d("MSG","왜 안돼돼")
 
             if (editText != null){
                 stationId = editText.text.toString()
-                Log.d("MSG","왜 안돼")
+
 
                 var htmlURL = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey="+serviceKey+"&stationId="+stationId
 
                 try{
-
-                    Log.d("MSG","왜")
 
                     val url = URL(htmlURL)
 
@@ -52,7 +47,6 @@ class BusActivity : AppCompatActivity() {
 
                     parser.setInput(url.openStream(), "UTF-8")
 
-                    Log.d("MSG","왜 안돼돼")
                     var parserEvent = parser.eventType
 
                     var currentBus : Bus? = null
@@ -70,15 +64,12 @@ class BusActivity : AppCompatActivity() {
 
                                 } else if (tagname.equals("plateNo1")) {
                                     currentBus?.plateNo1 = parser.nextText()
-                                    Log.d("test", currentBus?.plateNo1)
 
                                 } else if (tagname.equals("predictTime1")) {
                                     currentBus?.predictTime1 = parser.nextText().toInt()
-                                    Log.d("test", currentBus?.predictTime1.toString())
 
                                 } else if (tagname.equals("remainSeatCnt1")) {
                                     currentBus?.remainSeatCnt1 = parser.nextText().toInt()
-                                    Log.d("test", currentBus?.remainSeatCnt1.toString())
 
                                 }
                             }
@@ -87,7 +78,6 @@ class BusActivity : AppCompatActivity() {
                                 Log.d("text","띠용")
                                 if(tagname.equals("busArrivalList")){
                                     currentBus.let { it?.let { it1 -> busList?.add(it1) } }
-                                    Log.d("text", busList.toString())
                                 }
                             }
 
@@ -95,7 +85,6 @@ class BusActivity : AppCompatActivity() {
                         parserEvent = parser.next()
                     }
 
-                    Log.d("TEXT","도대체 어디가 안되는 거야")
 
                     val feel:String = intent.getStringExtra("feeling")
 
@@ -111,14 +100,12 @@ class BusActivity : AppCompatActivity() {
                         }
                     }
 
-                    Log.d("MSG", busList.toString())
 
                     val busAdapter by lazy {
                         BusAdapter(ArrayList())
                     }
 
                     DividerItemDecoration(applicationContext, LinearLayoutManager(this).orientation).run {
-                        //리사이클러뷰(list_save)에 구분선(Divider) 추가
                         recycle_bus.addItemDecoration(this)
                     }
 
@@ -129,13 +116,11 @@ class BusActivity : AppCompatActivity() {
                         busAdapter.busList = it
                         busAdapter.notifyDataSetChanged()
                     }
-                    //recycle_bus.adapter = BusAdapter(busList!!)
-                    //recycle_bus.layoutManager = LinearLayoutManager(this)
 
 
                 }catch (e: Exception){
                     e.printStackTrace()
-                    Log.d("TEST","에러발생")
+
                 }
 
 

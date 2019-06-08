@@ -5,6 +5,7 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.widget.Toast
 import com.example.wang_do_no.R
 import kotlinx.android.synthetic.main.activity_feel_bus.*
 
@@ -47,6 +48,8 @@ class FeelBusActivity : AppCompatActivity() {
                 val intent = Intent(this, BusActivity::class.java)
                 intent.putExtra("feeling", feel)
                 startActivity(intent)
+            }else{
+                Toast.makeText(this,"상태를 선택해주세요!", Toast.LENGTH_LONG).show()
             }
         }
 
