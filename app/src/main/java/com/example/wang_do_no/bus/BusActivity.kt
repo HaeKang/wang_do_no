@@ -28,15 +28,12 @@ class BusActivity : AppCompatActivity() {
 
         var busList: ArrayList<Bus>? = ArrayList()
 
-        Log.d("MSG","왜 안돼돼")
-
         btn_search.setOnClickListener{
 
-            Log.d("MSG","왜 안돼돼")
 
             if (editText != null){
                 stationId = editText.text.toString()
-                Log.d("MSG","왜 안돼")
+
             }else{
                 Toast.makeText(this,"정류장을 입력해주세요!", Toast.LENGTH_LONG).show()
             }
@@ -44,8 +41,6 @@ class BusActivity : AppCompatActivity() {
             var htmlURL = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey="+serviceKey+"&stationId="+stationId
 
             try{
-
-                Log.d("MSG","왜")
 
                 val url = URL(htmlURL)
 
@@ -55,7 +50,6 @@ class BusActivity : AppCompatActivity() {
 
                 parser.setInput(url.openStream(), "UTF-8")
 
-                Log.d("MSG","왜 안돼돼")
                 var parserEvent = parser.eventType
 
                 var currentBus : Bus? = null

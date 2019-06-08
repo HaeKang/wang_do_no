@@ -17,32 +17,40 @@
         
         <activity android:name=".bus.FeelBusActivity">
         </activity>
+
         <activity android:name=".subway.subway_friend">
         </activity>
+
         <activity
                 android:name=".subway.Find_Subway"
                 android:label="@string/title_activity_find__subway"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity android:name=".Sign.SignIn_Activity">
         </activity>
+
         <activity android:name=".Sign.SignUpEnd">
         </activity>
+
         <activity
                 android:name=".subway.Subway_"
                 android:label="@string/title_activity_subway_">
         </activity>
+
         <activity android:name=".Sign.SignUpActivity">
         </activity>
+
         <activity android:name=".bus.BusActivity">
         </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
