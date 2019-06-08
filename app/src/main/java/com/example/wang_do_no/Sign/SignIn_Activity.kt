@@ -54,6 +54,7 @@ class SignIn_Activity : AppCompatActivity() {
             Toast.makeText(this@SignIn_Activity, "자동로그인 상태입니다 로그아웃 후 이용해주세요", Toast.LENGTH_LONG).show()
             val auto_intent = Intent(this@SignIn_Activity, MainActivity::class.java)
             startActivity(auto_intent)
+            finish()
         }
 
 

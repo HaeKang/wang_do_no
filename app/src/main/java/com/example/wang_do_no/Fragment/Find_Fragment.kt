@@ -121,6 +121,11 @@ class Find_Fragment : Fragment() {
         // API 호출
 
         find_btn.setOnClickListener {
+            stationId[0] = 0
+            stationId[1] = 0
+            stationNum[0] = ""
+            stationNum[1] = ""
+
 
             var startstation = start_text.getText().toString()
             var endstation = end_text.getText().toString()
@@ -165,8 +170,8 @@ class Find_Fragment : Fragment() {
                     onResultCallbackListener
                 )
 
-                startName.setText(startstation)
-                endName.setText(endstation)
+                startName?.setText(startstation)
+                endName?.setText(endstation)
 
                 when(stationNum[0]){
                     null -> middle_img.setImageResource(R.drawable.check_off)
@@ -211,11 +216,6 @@ class Find_Fragment : Fragment() {
                 Log.d("test","마지막" + stationId[0].toString())
                 Log.d("test","마지막"+ stationId[1].toString())
                 Log.d("test","마지막 ${stationNum[0]}  ${stationNum[1]}")
-
-                stationId[0] = 0
-                stationId[1] = 0
-                stationNum[0] = ""
-                stationNum[1] = ""
 
 
             }, 1000)

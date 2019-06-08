@@ -62,7 +62,7 @@ class MiddleFragment : Fragment() {
             override fun onSuccess(odsayData: ODsayData, api: API) {
                 try {
 
-                    //최단거리
+                    //중간지점 찾기
                     if(api == API.SUBWAY_PATH) {
                         var stationNum = odsayData.json.getJSONObject("result").getString("globalStationCount").toString()
                         var stationMidIndex = stationNum.toInt() / 2
@@ -112,6 +112,12 @@ class MiddleFragment : Fragment() {
 
         // API 호출
         middle_btn.setOnClickListener {
+
+            stationId_mid[0] = 0
+            stationId_mid[1] = 0
+            stationMidName = ""
+            stationNum_mid = ""
+
 
             var startstation = start_text_mid.getText()
             var endstation = end_text_mid.getText()
@@ -186,10 +192,6 @@ class MiddleFragment : Fragment() {
                 }
 
 
-                stationId_mid[0] = 0
-                stationId_mid[1] = 0
-                stationMidName = ""
-                stationNum_mid = ""
             }, 1000)
         }
 
