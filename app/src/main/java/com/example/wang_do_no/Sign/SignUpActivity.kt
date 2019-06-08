@@ -16,7 +16,9 @@ import android.provider.ContactsContract
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.example.wang_do_no.MainActivity
 import com.example.wang_do_no.R
+import kotlinx.android.synthetic.main.activity_subway_.*
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -55,6 +57,13 @@ class SignUpActivity : AppCompatActivity() {
            }
 
        }
+
+        main_btn3.setOnClickListener {
+            val intent_main = Intent(this, MainActivity::class.java)
+            startActivity(intent_main)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
+        }
 
 
     }
