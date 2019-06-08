@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         var id = intent.getStringExtra("user_id")
         var pw = intent.getStringExtra("user_pw")
         var nickname = intent.getStringExtra("user_nickname")
         var subway = intent.getStringExtra("user_subway")
+
 
 
         // 버튼 클릭 이벤트
@@ -46,13 +46,19 @@ class MainActivity : AppCompatActivity() {
 
         //로그아웃
         logout.setOnClickListener {
-
-            Toast.makeText(this@MainActivity,"로그아웃 했습니다",Toast.LENGTH_LONG).show()
-
             id = null
             pw = null
             nickname = null
             subway = null
+
+            val auto = getSharedPreferences("auto", 0)
+            val autoEditor = auto.edit()
+
+            autoEditor.clear()
+            autoEditor.commit()
+
+            Toast.makeText(this@MainActivity,"로그아웃 했습니다",Toast.LENGTH_LONG).show()
+
         }
 
     }

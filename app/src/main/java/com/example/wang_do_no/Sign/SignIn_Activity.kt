@@ -38,6 +38,17 @@ class SignIn_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in_)
 
+        //자동로그인
+        val auto = getSharedPreferences("auto", 0)
+        val loginId = auto.getString("inputId", null)
+        val loginPw = auto.getString("inputPw",null)
+
+        if(loginId != null && loginPw != null){
+            Toast.makeText(this@SignIn_Activity, "자동로그인 상태입니다 로그아웃 후 이용해주세요", Toast.LENGTH_LONG).show()
+            val auto_intent = Intent(this@SignIn_Activity, MainActivity::class.java)
+            startActivity(auto_intent)
+        }
+
 
         SignUp_Btn.setOnClickListener {
             val intent_signup = Intent(this, SignUpActivity::class.java)
@@ -177,6 +188,16 @@ class SignIn_Activity : AppCompatActivity() {
             val pw = item.getString(TAG_PW)
             val nickname = item.getString(TAG_NICK)
             val subway = item.getString(TAG_SUBWAY)
+
+            //자동로그인
+            if(autologin.isChecked()) {
+                val auto = getSharedPreferences("auto", 0)
+                val autoEditor = auto.edit()
+
+                autoEditor.putString("inputId", edit_username.toString())
+                autoEditor.putString("inputPw", edit_password.toString())
+                autoEditor.commit()
+            }
 
             //로그인 완료
             val intent_signin = Intent(this@SignIn_Activity, MainActivity::class.java)
