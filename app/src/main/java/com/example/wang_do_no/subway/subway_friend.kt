@@ -19,6 +19,7 @@ import com.example.wang_do_no.MainActivity
 import com.example.wang_do_no.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_in_.*
+import kotlinx.android.synthetic.main.activity_subway_.*
 import kotlinx.android.synthetic.main.activity_subway_friend.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -71,6 +72,12 @@ class subway_friend : AppCompatActivity() {
             return@OnTouchListener true
         })
 
+        main_btn2.setOnClickListener {
+            val intent_main = Intent(this, MainActivity::class.java)
+            startActivity(intent_main)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
+        }
 
     }
 

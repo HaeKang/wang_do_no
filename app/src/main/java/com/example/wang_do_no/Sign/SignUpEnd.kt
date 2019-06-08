@@ -21,6 +21,8 @@ class SignUpEnd : AppCompatActivity() {
         Main_Btn.setOnClickListener{
             val intent_main = Intent(this, SignIn_Activity::class.java)
             startActivity(intent_main)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
         }
     }
 }

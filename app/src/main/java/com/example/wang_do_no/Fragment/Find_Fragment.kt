@@ -1,6 +1,7 @@
 package com.example.wang_do_no.Fragment
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -18,8 +19,8 @@ import kotlinx.android.synthetic.main.fragment_middle.*
 import org.json.JSONException
 import kotlin.concurrent.thread
 import android.os.Handler
-
-
+import com.example.wang_do_no.MainActivity
+import kotlinx.android.synthetic.main.activity_subway_.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,6 +49,7 @@ class Find_Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val KEY_Final = "1yVQ8nnVJ4S4AxSyhd/sI5Onevlu5YwdvlxOQ9O6iy8"
         var odsayService = ODsayService.init(this!!.getActivity()!!, KEY_Final)

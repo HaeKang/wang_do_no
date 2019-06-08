@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 
 import com.example.wang_do_no.Sign.SignIn_Activity
-import com.example.wang_do_no.bus.BusActivity
 import com.example.wang_do_no.bus.FeelBusActivity
 import com.example.wang_do_no.subway.Subway_
 import kotlinx.android.synthetic.main.activity_main.*
@@ -37,10 +36,12 @@ class MainActivity : AppCompatActivity() {
                 intent_subway.putExtra("user_nickname",nickname)
                 intent_subway.putExtra("user_subway",subway)
                 startActivity(intent_subway)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                finish()
 
             } else {
                 // 자동로그인 X
-                var id = intent.getStringExtra("user_id")
+                id = intent.getStringExtra("user_id")
                 var nickname = intent.getStringExtra("user_nickname")
                 var subway = intent.getStringExtra("user_subway")
 
@@ -48,18 +49,20 @@ class MainActivity : AppCompatActivity() {
                 intent_subway.putExtra("user_nickname",nickname)
                 intent_subway.putExtra("user_subway",subway)
                 startActivity(intent_subway)
-
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             }
         }
 
         SignIn_Button.setOnClickListener {
             val intent_sign = Intent(this, SignIn_Activity::class.java)
             startActivity(intent_sign)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
         Bus_Button.setOnClickListener {
             val intent_bus = Intent(this, FeelBusActivity::class.java)
             startActivity(intent_bus)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
         //로그아웃

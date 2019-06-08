@@ -33,7 +33,7 @@ class SignIn_Activity : AppCompatActivity() {
 
     var mJsonString: String? = null
 
-
+    var time:Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -210,7 +210,8 @@ class SignIn_Activity : AppCompatActivity() {
             intent_signin.putExtra("user_nickname",nickname)
             intent_signin.putExtra("user_subway",subway)
             startActivity(intent_signin)
-
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
         } catch (e: JSONException) {
 
             Log.d(TAG, "showResult : ", e)
@@ -219,6 +220,14 @@ class SignIn_Activity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed(){
+        if(System.currentTimeMillis()-time >=2000){
+            time = System.currentTimeMillis()
+            Toast.makeText(this@SignIn_Activity, "뒤로 버튼을 한번 더 누르면 메인으로 갑니다", Toast.LENGTH_LONG).show()
+        } else if(System.currentTimeMillis()-time < 2000){
+            finish()
+        }
+    }
 
 }
 

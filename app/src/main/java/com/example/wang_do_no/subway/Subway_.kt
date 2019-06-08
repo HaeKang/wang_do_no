@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.example.wang_do_no.MainActivity
 
 import com.example.wang_do_no.R
 import com.odsay.odsayandroidsdk.API
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_subway_.*
 import org.json.JSONException
 
 class Subway_ : AppCompatActivity() {
-
+    var time : Long = 0
     private val OpenApiKey = "44794542716375743539694f487571" // 실시간 정보 포함
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -35,6 +36,7 @@ class Subway_ : AppCompatActivity() {
                 val intent_friend = Intent(this, subway_friend::class.java)
                 intent_friend.putExtra("user_nickname",nickname)
                 startActivity(intent_friend)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             }
         }
 
@@ -52,10 +54,26 @@ class Subway_ : AppCompatActivity() {
         Find_btn.setOnClickListener{
             val intent_find = Intent(this, Find_Subway::class.java)
             startActivity(intent_find)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
 
+        main_btn.setOnClickListener {
+            val intent_main = Intent(this, MainActivity::class.java)
+            startActivity(intent_main)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
+        }
+
     }
 
-
+    // 뒤로가기 두번 이벤트
+    override fun onBackPressed(){
+        if(System.currentTimeMillis()-time >=2000){
+            time = System.currentTimeMillis()
+            Toast.makeText(this@Subway_, "뒤로 버튼을 한번 더 누르면 메인으로 갑니다", Toast.LENGTH_LONG).show()
+        } else if(System.currentTimeMillis()-time < 2000){
+            finish()
+        }
+    }
 }

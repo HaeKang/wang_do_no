@@ -50,6 +50,8 @@ class SignUpActivity : AppCompatActivity() {
                val intent_signend = Intent(this, SignUpEnd::class.java)
                intent_signend.putExtra(USER_NICKNAME, nickname)
                startActivity(intent_signend)
+               overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+               finish()
            }
 
        }
