@@ -43,9 +43,11 @@ class FeelBusActivity : AppCompatActivity() {
         }
 
         submit.setOnClickListener{
-            val intent = Intent(this, BusActivity::class.java)
-            intent.putExtra("feeling", feel)
-            startActivity(intent)
+            if(feel != null) {
+                val intent = Intent(this, BusActivity::class.java)
+                intent.putExtra("feeling", feel)
+                startActivity(intent)
+            }
         }
 
     }

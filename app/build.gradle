@@ -74,4 +74,5 @@ dependencies {
     implementation project(':ODsayAndroid')
 
     implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 }

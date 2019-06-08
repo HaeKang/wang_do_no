@@ -28,121 +28,107 @@ class BusActivity : AppCompatActivity() {
 
         var busList: ArrayList<Bus>? = ArrayList()
 
-        Log.d("MSG","왜 안돼돼")
-
         btn_search.setOnClickListener{
 
-            Log.d("MSG","왜 안돼돼")
 
             if (editText != null){
                 stationId = editText.text.toString()
-                Log.d("MSG","왜 안돼")
+
+                var htmlURL = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey="+serviceKey+"&stationId="+stationId
+
+                try{
+
+                    val url = URL(htmlURL)
+
+                    val factory = XmlPullParserFactory.newInstance()
+                    factory.isNamespaceAware = true
+                    val parser = factory.newPullParser()
+
+                    parser.setInput(url.openStream(), "UTF-8")
+
+                    var parserEvent = parser.eventType
+
+                    var currentBus : Bus? = null
+
+
+                    while (parserEvent != XmlPullParser.END_DOCUMENT){
+                        val tagname = parser.name
+
+                        when(parserEvent){
+
+                            XmlPullParser.START_TAG -> {
+                                if (tagname.equals("busArrivalList")) {
+                                    currentBus = Bus()
+
+                                } else if (tagname.equals("plateNo1")) {
+                                    currentBus?.plateNo1 = parser.nextText()
+                                    Log.d("test", currentBus?.plateNo1)
+
+                                } else if (tagname.equals("predictTime1")) {
+                                    currentBus?.predictTime1 = parser.nextText().toInt()
+                                    Log.d("test", currentBus?.predictTime1.toString())
+
+                                } else if (tagname.equals("remainSeatCnt1")) {
+                                    currentBus?.remainSeatCnt1 = parser.nextText().toInt()
+                                    Log.d("test", currentBus?.remainSeatCnt1.toString())
+
+                                }
+                            }
+
+                            XmlPullParser.END_TAG -> {
+                                Log.d("text","띠용")
+                                if(tagname.equals("busArrivalList")){
+                                    currentBus.let { it?.let { it1 -> busList?.add(it1) } }
+                                    Log.d("text", busList.toString())
+                                }
+                            }
+
+                        }
+                        parserEvent = parser.next()
+                    }
+
+                    val feel:String = intent.getStringExtra("feeling")
+
+                    when(feel) {
+                        "good" -> {
+                            busList?.sortBy { it.predictTime1 }
+                        }
+                        "soso" -> {
+                            busList?.sortWith(compareBy({it.predictTime1},{it.remainSeatCnt1}))
+                        }
+                        "bad" -> {
+                            busList?.sortByDescending { it.remainSeatCnt1 }
+                        }
+                    }
+
+                    Log.d("MSG", busList.toString())
+
+                    val busAdapter by lazy {
+                        BusAdapter(ArrayList())
+                    }
+
+                    DividerItemDecoration(applicationContext, LinearLayoutManager(this).orientation).run {
+                        //리사이클러뷰(list_save)에 구분선(Divider) 추가
+                        recycle_bus.addItemDecoration(this)
+                    }
+
+                    recycle_bus.adapter = busAdapter
+                    recycle_bus.layoutManager = LinearLayoutManager(this)
+
+                    busList?.let {
+                        busAdapter.busList = it
+                        busAdapter.notifyDataSetChanged()
+                    }
+
+                }catch (e: Exception){
+                    Log.d("TEST","에러발생")
+                }
+
             }else{
                 Toast.makeText(this,"정류장을 입력해주세요!", Toast.LENGTH_LONG).show()
             }
 
-            var htmlURL = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey="+serviceKey+"&stationId="+stationId
-
-            try{
-
-                Log.d("MSG","왜")
-
-                val url = URL(htmlURL)
-
-                val factory = XmlPullParserFactory.newInstance()
-                factory.isNamespaceAware = true
-                val parser = factory.newPullParser()
-
-                parser.setInput(url.openStream(), "UTF-8")
-
-                Log.d("MSG","왜 안돼돼")
-                var parserEvent = parser.eventType
-
-                var currentBus : Bus? = null
-
-
-
-                while (parserEvent != XmlPullParser.END_DOCUMENT){
-                    val tagname = parser.name
-
-                    when(parserEvent){
-
-                        XmlPullParser.START_TAG -> {
-                            if (tagname.equals("busArrivalList")) {
-                                currentBus = Bus()
-
-                            } else if (tagname.equals("plateNo1")) {
-                                currentBus?.plateNo1 = parser.nextText()
-                                Log.d("test", currentBus?.plateNo1)
-
-                            } else if (tagname.equals("predictTime1")) {
-                                currentBus?.predictTime1 = parser.nextText().toInt()
-                                Log.d("test", currentBus?.predictTime1.toString())
-
-                            } else if (tagname.equals("remainSeatCnt1")) {
-                                currentBus?.remainSeatCnt1 = parser.nextText().toInt()
-                                Log.d("test", currentBus?.remainSeatCnt1.toString())
-
-                            }
-                        }
-
-                        XmlPullParser.END_TAG -> {
-                            Log.d("text","띠용")
-                            if(tagname.equals("busArrivalList")){
-                                currentBus.let { it?.let { it1 -> busList?.add(it1) } }
-                                Log.d("text", busList.toString())
-                            }
-                        }
-
-                    }
-                    parserEvent = parser.next()
-                }
-
-                Log.d("TEXT","도대체 어디가 안되는 거야")
-
-                val feel:String = intent.getStringExtra("feeling")
-
-                when(feel) {
-                    "good" -> {
-                        busList?.sortBy { it.predictTime1 }
-                    }
-                    "soso" -> {
-                        busList?.sortWith(compareBy({it.predictTime1},{it.remainSeatCnt1}))
-                    }
-                    "bad" -> {
-                        busList?.sortByDescending { it.remainSeatCnt1 }
-                    }
-                }
-
-                Log.d("MSG", busList.toString())
-
-                val busAdapter by lazy {
-                    BusAdapter(ArrayList())
-                }
-
-                DividerItemDecoration(applicationContext, LinearLayoutManager(this).orientation).run {
-                    //리사이클러뷰(list_save)에 구분선(Divider) 추가
-                    recycle_bus.addItemDecoration(this)
-                }
-
-                recycle_bus.adapter = busAdapter
-                recycle_bus.layoutManager = LinearLayoutManager(this)
-
-                busList?.let {
-                    busAdapter.busList = it
-                    busAdapter.notifyDataSetChanged()
-                }
-                //recycle_bus.adapter = BusAdapter(busList!!)
-                //recycle_bus.layoutManager = LinearLayoutManager(this)
-
-
-            }catch (e: Exception){
-                Log.d("TEST","에러발생")
-            }
-
-
         }
-
 
     }
 }
