@@ -211,13 +211,6 @@ class Find_Fragment : Fragment() {
                     "112" -> end_img.setImageResource(R.drawable.full_kyeong_2)
                 }
 
-
-
-                Log.d("test","마지막" + stationId[0].toString())
-                Log.d("test","마지막"+ stationId[1].toString())
-                Log.d("test","마지막 ${stationNum[0]}  ${stationNum[1]}")
-
-
             }, 1000)
 
         }

@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 intent_subway.putExtra("user_subway",subway)
                 startActivity(intent_subway)
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                finish()
             }
         }
 
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
             val intent_sign = Intent(this, SignIn_Activity::class.java)
             startActivity(intent_sign)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
         }
 
         Bus_Button.setOnClickListener {

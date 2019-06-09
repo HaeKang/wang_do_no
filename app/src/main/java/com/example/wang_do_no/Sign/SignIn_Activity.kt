@@ -233,6 +233,9 @@ class SignIn_Activity : AppCompatActivity() {
             time = System.currentTimeMillis()
             Toast.makeText(this@SignIn_Activity, "뒤로 버튼을 한번 더 누르면 메인으로 갑니다", Toast.LENGTH_LONG).show()
         } else if(System.currentTimeMillis()-time < 2000){
+            val intent_main = Intent(this, MainActivity::class.java)
+            startActivity(intent_main)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }
     }
